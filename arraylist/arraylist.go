@@ -1,17 +1,19 @@
 package arraylist
 
 type ArrayList struct {
-	elements []int
+	elements []interface{}
 	size     int
 }
 
-func (list *ArrayList) Add(value int) {
-	list.grow()
-	list.elements[list.size] = value
-	list.size++
+func (list *ArrayList) Add(values ...interface{}) {
+	list.grow(len(values))
+	for _, value := range values {
+		list.elements[list.size] = value
+		list.size++
+	}
 }
 
-func (list *ArrayList) Get(index int) int {
+func (list *ArrayList) Get(index int) interface{} {
 	return list.elements[index]
 }
 
@@ -20,14 +22,11 @@ func (list *ArrayList) Set(index, value int) {
 }
 
 func (list *ArrayList) Remove(index int) {
-	// for i := index; i < list.size; i++ {
-	// 	list.elements[i] = list.elements[i+1]
-	// }
 	copy(list.elements[index:], list.elements[index+1:list.size])
 	list.size--
 }
 
-func (list *ArrayList) Values() []int {
+func (list *ArrayList) Values() []interface{} {
 	return list.elements[0:list.size]
 }
 
@@ -36,20 +35,20 @@ func (list *ArrayList) Size() int {
 }
 
 func (list *ArrayList) Clear() {
-	list.elements = []int{}
+	list.elements = []interface{}{}
 	list.size = 0
 }
 
 func (list *ArrayList) resize(cap int) {
-	newElements := make([]int, cap, cap)
+	newElements := make([]interface{}, cap, cap)
 	copy(newElements, list.elements)
 	list.elements = newElements
 }
 
-func (list *ArrayList) grow(){
+func (list *ArrayList) grow(length int) {
 	currentCapacity := cap(list.elements)
-	if list.size + 1 >= currentCapacity {
-		newCapacity := (currentCapacity + 1) * 2
+	if list.size+length >= currentCapacity {
+		newCapacity := (currentCapacity + length) * 2
 		list.resize(newCapacity)
 	}
 }

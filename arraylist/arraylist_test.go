@@ -1,13 +1,13 @@
 package arraylist
 
 import (
-	"testing"
 	"reflect"
+	"testing"
 )
 
 func TestArrayList(t *testing.T) {
 
-	assertTrue := func(t *testing.T, got int, want int) {
+	assertTrue := func(t *testing.T, got interface{}, want interface{}) {
 		if got != want {
 			t.Errorf("got %q, want %q", got, want)
 		}
@@ -35,7 +35,7 @@ func TestArrayList(t *testing.T) {
 		list := ArrayList{}
 		list.Add(2)
 		list.Set(0, 3)
-			
+
 		got := list.Get(0)
 		want := 3
 		assertTrue(t, got, want)
@@ -43,13 +43,11 @@ func TestArrayList(t *testing.T) {
 
 	t.Run("Remove", func(t *testing.T) {
 		list := ArrayList{}
-		for i := 1; i < 6; i++ {
-			list.Add(i)
-		}
+		list.Add(1,2,3,4,5)
 		list.Remove(2)
 
 		got := list.Values()
-		want := [4]int{1, 2, 4 ,5}
+		want := [4]int{1, 2, 4, 5}
 		if reflect.DeepEqual(got, want) {
 			t.Errorf("got %v, want %v", got, want)
 		}
