@@ -27,7 +27,9 @@ func (list *ArrayList) Remove(index int) {
 }
 
 func (list *ArrayList) Values() []interface{} {
-	return list.elements[0:list.size]
+	newElements := make([]interface{}, list.size)
+	copy(newElements, list.elements)
+	return newElements
 }
 
 func (list *ArrayList) Size() int {
