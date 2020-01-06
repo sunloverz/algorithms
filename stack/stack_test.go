@@ -52,7 +52,7 @@ func TestArrayList(t *testing.T) {
 		stack.Push("one")
 		stack.Push("two")
 		stack.Push("three")
-		
+
 		got := stack.Search("three")
 		want := 2
 		assertTrue(t, got, want)

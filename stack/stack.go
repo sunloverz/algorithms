@@ -2,7 +2,7 @@ package stack
 
 type Stack struct {
 	elements []interface{}
-	size int
+	size     int
 }
 
 func (stack *Stack) Push(value interface{}) {
@@ -36,14 +36,14 @@ func (stack *Stack) Size() interface{} {
 }
 
 func (stack *Stack) Empty() bool {
-	return stack.size == 0	
+	return stack.size == 0
 }
 
 func (stack *Stack) grow() {
 	currentCapacity := cap(stack.elements)
-	if stack.size + 1 > currentCapacity {
+	if stack.size+1 > currentCapacity {
 		stack.resize((currentCapacity + 1) * 2)
-	}  
+	}
 }
 
 func (stack *Stack) resize(length int) {
@@ -51,4 +51,3 @@ func (stack *Stack) resize(length int) {
 	copy(newElements, stack.elements)
 	stack.elements = newElements
 }
-
