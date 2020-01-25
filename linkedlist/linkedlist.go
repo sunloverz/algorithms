@@ -1,4 +1,4 @@
-package main
+package linkedlist
 
 import (
 	"fmt"
@@ -30,7 +30,7 @@ func (l *List) InsertAt(n, value int) {
 		return
 	}
 	temp2 := l.Head
-	for i:=0; i<n-2; i++ {
+	for i := 0; i < n-2; i++ {
 		temp2 = temp2.Next
 	}
 	temp1.Next = temp2.Next
@@ -44,7 +44,7 @@ func (l *List) DeleteAt(n int) {
 		temp = nil
 		return
 	}
-	for i:=0; i<n-2; i++ {
+	for i := 0; i < n-2; i++ {
 		temp = temp.Next
 	}
 	temp2 := temp.Next
@@ -52,29 +52,54 @@ func (l *List) DeleteAt(n int) {
 	temp2 = nil
 }
 
-func (l *List) Print() {
+func (l *List) Values() []int {
+	var values []int
+	for n := l.Head; n != nil; n = n.Next {
+		values = append(values, n.Value)
+	}
+	return values
+}
 
+func (l *List) Reverse() {
+	var prev, current, next *Node
+	next = l.Head.Next
+
+	for current = l.Head; current != nil; current = next {
+		next = current.Next
+		current.Next = prev
+		prev = current
+	}
+	l.Head = prev
+}
+
+func (l *List) BatchInsert(values []int) {
+	for _, val := range values {
+		l.Insert(val)
+	}
+}
+
+func (l *List) Print() {
 	for n := l.Head; n != nil; n = n.Next {
 		fmt.Printf("%d ", n.Value)
 	}
 	fmt.Println()
 }
 
-func main() {
-	list := List{}
-	// list.Insert(2)
-	// list.Insert(3)
-	// list.Insert(4)
-	// list.Insert(5)
-	list.InsertAt(1, 2)
-	list.InsertAt(2, 3)
-	list.InsertAt(1, 4)
-	list.InsertAt(2, 5)
-	// list.Print()
-	list.DeleteAt(1)
-	list.Print()
-	list.DeleteAt(3)
-	list.Print()
-	list.DeleteAt(2)
-	list.Print()
+func (l *List) RecursiveReverse(node *Node) {
+	if node.Next == nil {
+		l.Head = node
+		return
+	}
+	l.RecursiveReverse(node.Next)
+	next := node.Next
+	next.Next = node
+	node.Next = nil
+}
+
+func ReversePrint(node *Node) {
+	if node == nil {
+		return
+	}
+	ReversePrint(node.Next)
+	fmt.Printf("%d ", node.Value)
 }
