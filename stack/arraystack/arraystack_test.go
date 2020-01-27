@@ -1,10 +1,10 @@
-package stack
+package arraystack
 
 import (
 	"testing"
 )
 
-func TestArrayList(t *testing.T) {
+func TestStack(t *testing.T) {
 	assertTrue := func(t *testing.T, got interface{}, want interface{}) {
 		if got != want {
 			t.Errorf("got %q, want %q", got, want)

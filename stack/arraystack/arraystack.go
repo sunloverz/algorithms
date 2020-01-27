@@ -1,4 +1,4 @@
-package stack
+package arraystack
 
 type Stack struct {
 	elements []interface{}
