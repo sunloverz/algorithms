@@ -2,14 +2,14 @@ package linkedliststack
 
 type Node struct {
 	Value int
-	Next *Node
+	Next  *Node
 }
 
 type Stack struct {
 	Head *Node
 }
 
-func (stack *Stack ) Push(value int) {
+func (stack *Stack) Push(value int) {
 	newNode := Node{Value: value}
 	newNode.Next = stack.Head
 	stack.Head = &newNode
@@ -21,7 +21,7 @@ func (stack *Stack) Pop() int {
 	stack.Head = node.Next
 	node = nil
 	return value
-} 
+}
 
 func (stack *Stack) Peek() int {
 	return stack.Head.Value
@@ -33,8 +33,8 @@ func (stack *Stack) IsEmpty() bool {
 
 func (stack *Stack) Values() []int {
 	values := []int{}
-	for n := stack.Head; n!=nil; n=n.Next {
+	for n := stack.Head; n != nil; n = n.Next {
 		values = append(values, n.Value)
 	}
 	return values
-} 
+}
