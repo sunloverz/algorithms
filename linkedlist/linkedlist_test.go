@@ -1,4 +1,4 @@
-package singly
+package linkedlist
 
 import "testing"
 

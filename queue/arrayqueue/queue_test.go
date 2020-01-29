@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestArrayList(t *testing.T) {
+func TestQueue(t *testing.T) {
 	assertTrue := func(t *testing.T, got interface{}, want interface{}) {
 		if got != want {
 			t.Errorf("got %q, want %q", got, want)

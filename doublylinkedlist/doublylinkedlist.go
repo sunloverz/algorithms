@@ -1,4 +1,4 @@
-package doubly
+package doublylinkedlist
 
 type Node struct {
 	Value int
