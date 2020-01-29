@@ -25,7 +25,7 @@ func TestQueue(t *testing.T) {
 		}
 	})
 
-	t.Run("Dequeu", func(t *testing.T) {
+	t.Run("Dequeue", func(t *testing.T) {
 		queue := Queue{}
 		queue.Enqueue(1)
 		queue.Enqueue(2)
@@ -35,7 +35,7 @@ func TestQueue(t *testing.T) {
 		for _, wantValue := range want {
 			got := queue.Peek()
 			assertTrue(t, got, wantValue)
-			queue.Deque()
+			queue.Dequeue()
 		}
 	})
 

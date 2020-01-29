@@ -20,7 +20,7 @@ func (q *Queue) Enqueue(value int) {
 	q.Rear = &temp
 }
 
-func (q *Queue) Deque() {
+func (q *Queue) Dequeue() {
 	if q.IsEmpty() {
 		return
 	}
