@@ -16,8 +16,7 @@ func (queue *Queue) Dequeue() interface{} {
 		return nil
 	}
 	value := queue.elements[0]
-	copy(queue.elements[:queue.size-1], queue.elements[1:queue.size])
-	queue.elements[queue.size] = nil
+	queue.elements = queue.elements[1:]
 	queue.size--
 	return value
 }
