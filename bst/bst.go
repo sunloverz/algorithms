@@ -45,6 +45,22 @@ func insertNode(root *Node, value int) *Node {
 	return root
 }
 
+func (t *BinarySearchTree) Min() int {
+	var min int
+	for n := t.Root; n != nil; n = n.Left {
+		min = n.Value
+	}
+	return min
+}
+
+func (t *BinarySearchTree) Max() int {
+	var max int
+	for n := t.Root; n != nil; n = n.Right {
+		max = n.Value
+	}
+	return max
+}
+
 func main() {
 	var tree BinarySearchTree
 	tree.Insert(15)
@@ -57,5 +73,7 @@ func main() {
 	fmt.Println(tree.Search(6))
 	fmt.Println(tree.Search(10))
 	fmt.Println(tree.Search(25))
-    fmt.Println(tree.Search(30))
+	fmt.Println(tree.Search(30))
+	fmt.Println(tree.Min())
+	fmt.Println(tree.Max())
 }
