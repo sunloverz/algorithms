@@ -25,6 +25,18 @@ func TestBinarySearchTree(t *testing.T) {
 		assertArray(t, got, want)
 	})
 
+	t.Run("Search", func(t *testing.T) {
+		tree := BinarySearchTree{}
+		values := []int{15, 10, 20, 6, 12, 25}
+		for _, val := range values {
+			tree.Insert(val)
+		}
+		got := tree.Search(6)
+		assertTrue(t, got, true)
+		got = tree.Search(7)
+		assertTrue(t, got,false)
+	})
+
 	t.Run("Max", func(t *testing.T) {
 		tree := BinarySearchTree{}
 		values := []int{15, 10, 20, 6, 12, 25}
