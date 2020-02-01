@@ -1,8 +1,4 @@
-package main
-
-import (
-	"fmt"
-)
+package bst
 
 type Node struct {
 	Value int
@@ -16,6 +12,17 @@ type BinarySearchTree struct {
 
 func (t *BinarySearchTree) Insert(value int) {
 	t.Root = insertNode(t.Root, value)
+}
+
+func insertNode(root *Node, value int) *Node {
+	if root == nil {
+		root = &Node{Value: value}
+	} else if value > root.Value {
+		root.Right = insertNode(root.Right, value)
+	} else {
+		root.Left = insertNode(root.Left, value)
+	}
+	return root
 }
 
 func (t *BinarySearchTree) Search(value int) bool {
@@ -34,17 +41,6 @@ func search(root *Node, value int) bool {
 	}
 }
 
-func insertNode(root *Node, value int) *Node {
-	if root == nil {
-		root = &Node{Value: value}
-	} else if value > root.Value {
-		root.Right = insertNode(root.Right, value)
-	} else {
-		root.Left = insertNode(root.Left, value)
-	}
-	return root
-}
-
 func (t *BinarySearchTree) Min() int {
 	var min int
 	for n := t.Root; n != nil; n = n.Left {
@@ -61,19 +57,23 @@ func (t *BinarySearchTree) Max() int {
 	return max
 }
 
-func main() {
-	var tree BinarySearchTree
-	tree.Insert(15)
-	tree.Insert(10)
-	tree.Insert(20)
-	tree.Insert(25)
-	tree.Insert(6)
-	tree.Insert(12)
-	fmt.Println(tree.Root.Value)
-	fmt.Println(tree.Search(6))
-	fmt.Println(tree.Search(10))
-	fmt.Println(tree.Search(25))
-	fmt.Println(tree.Search(30))
-	fmt.Println(tree.Min())
-	fmt.Println(tree.Max())
+func (t *BinarySearchTree) BFS() []int {
+	if t.Root == nil {
+		return []int{}
+	}
+	values := make([]int, 0)
+	queue := make([]*Node, 0)
+	queue = append(queue, t.Root)
+	for ok := true; ok; ok = len(queue) > 0 {
+		current := queue[0]
+		values = append(values, current.Value)
+		if current.Left != nil {
+			queue = append(queue, current.Left)
+		}
+		if current.Right != nil {
+			queue = append(queue, current.Right)
+		}
+		queue = queue[1:]
+	}
+	return values
 }
